@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>in silico</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='72' font-family='serif' font-size='55' font-style='italic' font-weight='700' text-anchor='middle'>is</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+        }
+        .header {
+            margin-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 56px;
+            margin-bottom: 0;
+        }
+        .names {
+            font-size: 18px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        .content {
+            max-width: 600px;
+            text-align: left;
+        }
+        .category {
+            margin-top: 40px;
+            border-top: 2px solid black;
+            padding-top: 10px;
+            position: relative;
+        }
+        .category h2 {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            background-color: white;
+            padding-right: 10px;
+            margin: 0;
+            font-size: 26px;
+        }
+        .event {
+            margin-top: 30px;
+        }
+        .event h3 {
+            margin-top: 0;
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+        .event-meta {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .speaker-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .speaker-list li {
+            margin-bottom: 8px;
+        }
+        .speaker-name {
+            font-weight: 700;
+        }
+        .speaker-affiliation {
+            font-style: italic;
+        }
+        .talk-title {
+            display: block;
+            margin-top: 2px;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .sponsors {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="font-family: 'Tinos', serif; font-style: italic;">in silico</h1>
+        <div class="names" id="organizers"></div>
+        <script>
+            const organizers = [
+                { name: "Barney Hill", url: "https://x.com/_barneyhill" },
+                { name: "Jakub Lala", url: "https://x.com/jakublala" },
+                { name: "David Miller", url: "https://x.com/dmmiller597" },
+            ];
+            organizers.sort((a, b) => a.name.split(" ").pop().localeCompare(b.name.split(" ").pop()));
+            document.getElementById("organizers").innerHTML = organizers
+                .map(o => `<a href="${o.url}">${o.name}</a>`)
+                .join(" &nbsp;&nbsp; ");
+        </script>
+    </div>
+    <div class="content">
+        <p>
+            We are three London-based PhD students who believe computation is transforming biology. Every couple of months we invite four speakers whose work excites us to share their perspective on how this is happening.
+        </p>
+
+        <div class="category">
+            <h2>Questions we are asking</h2>
+            <ul style="margin-top: 20px; padding-left: 20px;">
+                <li>Will we see sustained progress in biomolecular structure prediction modelling through architecture improvements, or will progress be driven by orgs with access to proprietary data?</li>
+                <li>How do we collate enough preclinical data (i.e. toxicology read-outs) so that biomolecular modelling can be useful beyond hit discovery?</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>Past</h2>
+
+            <div class="event">
+                <h3><a href="https://luma.com/gb3uso7t">In Silico #004</a></h3>
+                <p class="event-meta">February 25, 2026 &middot; Phoenix Court</p>
+                <ul class="speaker-list">
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/mcclain-thiel">McClain Thiel</a> <span class="speaker-affiliation">(UCL / Encode Fellow)</span>
+                        <span class="talk-title">"Reinforcement learning and Genomic Language Models"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/patrick-kidger">Patrick Kidger</a> <span class="speaker-affiliation">(Cradle Bio)</span>
+                        <span class="talk-title">"Notes from the horizontals and verticals of AI-biotech"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/kpetrovvic">Katarina Petrovic</a> <span class="speaker-affiliation">(Oxford)</span>
+                        <span class="talk-title">"Flow Matching for Learning Cell Dynamics"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/ijayapurna">Ivan Jayapurna</a> <span class="speaker-affiliation">(ARIA)</span>
+                        <span class="talk-title">"Proteins = Universal Fabricators"</span>
+                    </li>
+                </ul>
+                <p class="sponsors">Sponsored by <a href="https://www.pillar.vc/">Pillar VC</a> &amp; <a href="https://localglobe.vc">LocalGlobe</a></p>
+            </div>
+
+            <div class="event">
+                <h3><a href="https://luma.com/ktxftvdl">In Silico #003</a></h3>
+                <p class="event-meta">December 10, 2025 &middot; IDEALondon</p>
+                <ul class="speaker-list">
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/gcorso/">Gabriele Corso</a> <span class="speaker-affiliation">(Boltz)</span>
+                        <span class="talk-title">"BoltzGen: Toward Universal Binder Design"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/miruna-cretu-850288193/">Miruna Cretu</a> <span class="speaker-affiliation">(Cambridge)</span>
+                        <span class="talk-title">"Bridging design and synthesis in small-molecule generation"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/calum-drysdale-b214bb181/">Calum Drysdale</a> <span class="speaker-affiliation">(KCL)</span>
+                        <span class="talk-title">"Scaling Biocompute"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/charlie-harris-388285156/">Charlie Harris</a> <span class="speaker-affiliation">(DSIT, Cambridge)</span>
+                        <span class="talk-title">"OpenBind: Scaling the protein-ligand complexes in the PDB by x25"</span>
+                    </li>
+                </ul>
+                <p class="sponsors">Sponsored by <a href="https://www.renaissancephilanthropy.org/">Renaissance Philanthropy</a>, <a href="https://www.aria.org.uk/">ARIA</a> &amp; <a href="https://www.idealondon.co.uk/">IDEALondon</a></p>
+            </div>
+
+            <div class="event">
+                <h3><a href="https://luma.com/txswapqo">In Silico #002</a></h3>
+                <p class="event-meta">October 1, 2025 &middot; IDEALondon</p>
+                <ul class="speaker-list">
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/sebastian-schmon/">Sebastian Schmon</a> <span class="speaker-affiliation">(Latent Labs)</span>
+                        <span class="talk-title">"Latent-X: An Atom-level Frontier Model for De Novo Protein Binder Design"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/amyxlu/">Amy Lu</a> <span class="speaker-affiliation">(UC Berkeley)</span>
+                        <span class="talk-title">"Repurposing Protein Folding Models for All-Atom Generation via Latent Space Compression"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/dominik-dekleva/">Dominik Dekleva</a> <span class="speaker-affiliation">(AstraZeneca)</span>
+                        <span class="talk-title">"Synthesis-Aware Molecular Generation with REINVENT"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/simonmathis/">Simon Mathis</a> <span class="speaker-affiliation">(Cambridge)</span>
+                        <span class="talk-title">"Accelerating Biomolecular Modeling with AtomWorks and RF3"</span>
+                    </li>
+                </ul>
+                <p class="sponsors">Sponsored by <a href="https://www.renaissancephilanthropy.org/">Renaissance Philanthropy</a>, <a href="https://www.aria.org.uk/">ARIA</a> &amp; <a href="https://www.idealondon.co.uk/">IDEALondon</a></p>
+            </div>
+
+            <div class="event">
+                <h3><a href="https://luma.com/dw9ijcrm">In Silico #001</a></h3>
+                <p class="event-meta">July 31, 2025 &middot; Phoenix Court</p>
+                <ul class="speaker-list">
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/saro-passaro/">Saro Passaro</a> <span class="speaker-affiliation">(MIT)</span>
+                        <span class="talk-title">"Boltz-2: towards accurate and efficient binding affinity prediction"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/jude-wells/">Jude Wells</a> <span class="speaker-affiliation">(UCL)</span>
+                        <span class="talk-title">"Plixer: generating drug-like molecules to fit protein pockets"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/barney-hill-96245819b/">Barney Hill</a> <span class="speaker-affiliation">(Oxford)</span>
+                        <span class="talk-title">"OligoScan: accelerating preclinical screening for rare disease gene therapies"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/michaela-brezinova/">Michaela Brezinova</a> <span class="speaker-affiliation">(Cambridge)</span>
+                        <span class="talk-title">"Identification of high-affinity secondary nucleation inhibitors of A&beta;42 aggregation from an ultra-large chemical library using Deep Docking"</span>
+                    </li>
+                </ul>
+                <p class="sponsors">Sponsored by <a href="https://londonmicrogrants.org/">London Microgrants</a> &amp; <a href="https://localglobe.vc">LocalGlobe</a></p>
+            </div>
+        </div>
+
+    </div>
+    <br>
+</body>
+</html>
