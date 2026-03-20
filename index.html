@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>in silico</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text x='50' y='72' font-family='monospace' font-size='50' font-weight='700' fill='%23e0e0e0' text-anchor='middle'>is</text></svg>">
+    <title>In Silico</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23010102'/><text x='50' y='72' font-family='monospace' font-size='50' font-weight='700' fill='%2375B5AF' text-anchor='middle'>is</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&family=Tinos:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #010102;
+            --magenta: #E616E2;
+            --mint: #B2E4C1;
+            --teal-deep: #487B7D;
+            --sage: #61957A;
+            --teal: #75B5AF;
+        }
+
         @font-face {
             font-family: 'Departure Mono';
             src: url('./DepartureMono-Regular.woff2') format('woff2');
@@ -16,111 +25,214 @@
             font-style: normal;
             font-display: swap;
         }
+
+        ::selection {
+            background: var(--teal-deep);
+            color: var(--mint);
+        }
+
         body {
             font-family: 'Departure Mono', monospace;
             margin: 0;
-            padding: 20px;
+            padding: 28px 20px 48px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1.6;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            line-height: 1.65;
+            background-color: var(--bg);
+            color: var(--mint);
         }
+
         .header {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         h1 {
-            font-size: 80px;
+            font-family: 'VT323', 'Departure Mono', monospace;
+            font-size: clamp(4.5rem, 14vw, 6.5rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
             margin-bottom: 0;
-            color: #fff;
+            color: var(--teal);
             text-shadow:
-                -2px 0 #ff0000,
-                2px 0 #00ffff,
-                0 0 8px rgba(255, 255, 255, 0.6),
-                0 0 20px rgba(255, 255, 255, 0.3);
+                4px 1px var(--magenta),
+                -2px -1px color-mix(in srgb, var(--teal-deep) 70%, transparent),
+                0 0 28px color-mix(in srgb, var(--teal) 35%, transparent),
+                0 0 56px color-mix(in srgb, var(--magenta) 18%, transparent);
         }
+
         .names {
-            font-size: 18px;
-            margin-top: 5px;
-            margin-bottom: 30px;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-bottom: 32px;
+            color: var(--sage);
         }
+
         .content {
             max-width: 600px;
             text-align: left;
         }
+
+        .content > p:first-of-type {
+            color: var(--mint);
+            border-left: 3px solid var(--teal-deep);
+            padding-left: 16px;
+            margin-left: 0;
+        }
+
         .category {
-            margin-top: 40px;
-            border-top: 2px solid #e0e0e0;
-            padding-top: 10px;
+            margin-top: 44px;
+            border-top: 1px solid var(--teal-deep);
+            padding-top: 14px;
             position: relative;
         }
+
         .category h2 {
             position: absolute;
-            top: -25px;
+            top: -26px;
             left: 0;
-            background-color: #1a1a1a;
-            padding-right: 10px;
+            background-color: var(--bg);
+            padding-right: 12px;
             margin: 0;
-            font-size: 26px;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--teal);
+            letter-spacing: 0.04em;
         }
+
+        .category ul {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .category ul li::marker {
+            color: var(--teal);
+        }
+
         .event {
-            margin-top: 35px;
+            margin-top: 38px;
         }
+
         .event h3 {
             margin-top: 0;
             font-size: 22px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            font-weight: 400;
         }
+
         .event-meta {
             margin-top: 0;
             margin-bottom: 12px;
             font-style: italic;
-            color: #888;
+            color: var(--teal-deep);
             font-size: 13px;
         }
+
         .speaker-list {
             list-style: none;
             padding: 0;
-            margin: 10px 0;
+            margin: 12px 0;
         }
+
         .speaker-list li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-left: 14px;
+            border-left: 2px solid color-mix(in srgb, var(--teal-deep) 55%, transparent);
         }
+
         .speaker-name {
             font-weight: 700;
         }
+
         .speaker-affiliation {
             font-style: italic;
-            color: #999;
+            color: var(--sage);
         }
+
         .talk-title {
             display: block;
-            margin-top: 2px;
-            padding-left: 12px;
-            color: #bbb;
+            margin-top: 4px;
+            padding-left: 0;
+            color: color-mix(in srgb, var(--teal) 82%, var(--bg));
             font-size: 13px;
         }
+
         a {
-            color: rgb(43, 158, 34);
+            color: var(--teal);
             text-decoration: none;
+            text-underline-offset: 3px;
         }
+
         a:hover {
+            color: var(--mint);
             text-decoration: underline;
+            text-decoration-color: var(--sage);
         }
+
         .sponsors {
-            margin-top: 12px;
+            margin-top: 14px;
             font-size: 12px;
-            color: #666;
+            color: var(--teal-deep);
+        }
+
+        .sponsors a {
+            color: var(--sage);
+        }
+
+        .sponsors a:hover {
+            color: var(--teal);
+        }
+
+        /* Past events: lighter green (mint) as the primary tone */
+        .past-events h2 {
+            color: var(--mint);
+        }
+
+        .past-events .event h3 a,
+        .past-events .speaker-name {
+            color: var(--mint);
+        }
+
+        .past-events a:hover {
+            color: var(--teal);
+            text-decoration-color: var(--teal-deep);
+        }
+
+        .past-events .event-meta {
+            color: color-mix(in srgb, var(--mint) 58%, var(--teal-deep));
+        }
+
+        .past-events .speaker-affiliation {
+            color: color-mix(in srgb, var(--mint) 52%, var(--sage));
+        }
+
+        .past-events .talk-title {
+            color: color-mix(in srgb, var(--mint) 80%, var(--bg));
+        }
+
+        .past-events .sponsors {
+            color: color-mix(in srgb, var(--mint) 48%, var(--teal-deep));
+        }
+
+        .past-events .sponsors a {
+            color: var(--mint);
+        }
+
+        .past-events .sponsors a:hover {
+            color: var(--teal);
+        }
+
+        .past-events .speaker-list li {
+            border-left-color: color-mix(in srgb, var(--mint) 45%, transparent);
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 data-no-scramble style="font-family: 'Tinos', serif; font-style: italic;">in silico</h1>
+        <h1 data-no-scramble>In Silico</h1>
         <div class="names" id="organizers"></div>
         <script>
             const organizers = [
@@ -141,14 +253,14 @@
 
         <div class="category">
             <h2>Questions we are asking</h2>
-            <ul style="margin-top: 20px; padding-left: 20px;">
+            <ul>
                 <li>Will we see sustained progress in biomolecular structure prediction modelling through architecture improvements, or will progress be driven by orgs with access to proprietary data?</li>
                 <li>How do we collate enough preclinical data (i.e. toxicology read-outs) so that biomolecular modelling can be useful beyond hit discovery?</li>
                 <li>How can experimental validation keep pace with the growing volume of confident in silico genetic disease predictions?</li>
             </ul>
         </div>
 
-        <div class="category">
+        <div class="category past-events">
             <h2>Past</h2>
 
             <div class="event">
