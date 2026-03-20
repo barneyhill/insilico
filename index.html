@@ -69,18 +69,31 @@
             margin-top: 10px;
             margin-bottom: 32px;
             color: var(--sage);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+            column-gap: 1em;
+            row-gap: 0.35em;
+            max-width: 100%;
+            padding: 0 4px;
+            box-sizing: border-box;
+        }
+
+        .names a {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 480px) {
+            .names {
+                font-size: clamp(13px, 3.6vw, 16px);
+                column-gap: 0.65em;
+            }
         }
 
         .content {
             max-width: 600px;
             text-align: left;
-        }
-
-        .content > p:first-of-type {
-            color: var(--mint);
-            border-left: 3px solid var(--teal-deep);
-            padding-left: 16px;
-            margin-left: 0;
         }
 
         .category {
@@ -243,7 +256,7 @@
             organizers.sort((a, b) => a.name.split(" ").pop().localeCompare(b.name.split(" ").pop()));
             document.getElementById("organizers").innerHTML = organizers
                 .map(o => `<a href="${o.url}">${o.name}</a>`)
-                .join(" &nbsp;&nbsp; ");
+                .join("");
         </script>
     </div>
     <div class="content">
