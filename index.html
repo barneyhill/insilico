@@ -12,9 +12,9 @@
         :root {
             --bg: #010102;
             --magenta: #E616E2;
-            --mint: #B2E4C1;
+            --mint: #A8D8D4;
             --teal-deep: #487B7D;
-            --sage: #61957A;
+            --sage: #5E9490;
             --teal: #75B5AF;
         }
 
@@ -164,7 +164,7 @@
         }
 
         .speaker-affiliation {
-            font-style: italic;
+            font-style: normal;
             color: var(--sage);
         }
 
@@ -237,16 +237,79 @@
             color: var(--teal);
         }
 
+        /* MSA Animated Title */
+        .msa-block {
+            margin-bottom: 10px;
+            font-family: 'Departure Mono', monospace;
+            font-size: clamp(12px, calc((100vw - 40px) / 13), 42px);
+            line-height: 1.0;
+            white-space: pre;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .msa-row {
+            display: block;
+        }
+
+        .msa-char {
+            display: inline-block;
+            width: 1ch;
+            text-align: center;
+            color: color-mix(in srgb, var(--teal-deep) 42%, var(--bg));
+            transition: color 0.15s, text-shadow 0.15s;
+        }
+
+        .msa-char.conserved {
+            color: var(--teal);
+            font-weight: 700;
+            text-shadow: 3px 1px 0 color-mix(in srgb, var(--magenta) 55%, transparent);
+        }
+
+        .msa-char.gap {
+            color: color-mix(in srgb, var(--teal-deep) 16%, var(--bg));
+        }
+
+        .msa-char.cycling {
+            color: color-mix(in srgb, var(--teal-deep) 32%, var(--bg));
+        }
+
+        .msa-char.lock-flash {
+            color: var(--teal);
+            font-weight: 700;
+            text-shadow: 3px 1px 0 color-mix(in srgb, var(--magenta) 55%, transparent);
+        }
+
+        @keyframes rowSlideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes rowFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            .category h2 {
+                position: static;
+                padding-right: 0;
+                margin-bottom: 8px;
+            }
+            .category {
+                padding-top: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 data-no-scramble>In Silico</h1>
+        <div class="msa-block" id="msa-hero" data-no-scramble></div>
         <div class="names" id="organizers"></div>
         <script>
             const organizers = [
                 { name: "Barney Hill", url: "https://x.com/_barneyhill" },
-                { name: "Jakub Lala", url: "https://x.com/jakublala" },
+                { name: "Jakub Lála", url: "https://www.linkedin.com/in/jlala" },
                 { name: "David Miller", url: "https://x.com/dmmiller597" },
             ];
             organizers.sort((a, b) => a.name.split(" ").pop().localeCompare(b.name.split(" ").pop()));
@@ -255,6 +318,110 @@
                 .join("");
         </script>
     </div>
+    <script>
+    (function() {
+        var AAs = 'ACDEFGHIKLMNPQRSTVWY';
+        var CONSERVED = { 2:'I', 4:'N', 8:'S', 10:'I', 12:'L', 14:'I', 16:'C', 18:'O' };
+        var CSET = new Set([2,4,8,10,12,14,16,18]);
+        var CSORTED = [2,4,8,10,12,14,16,18];
+        var TARGETS = [
+            'GVIKNA-MSRITLDIWCFOLA',
+            'KRIFN-GASDIVLQIECMORH',
+            'ALIWNP-DSHIGLKIRCAOFM',
+            'MDIKNLV-SGIALYISCGOWR',
+            'THIEN-FVSMIWLPIQCKOTD'
+        ];
+        var SL = TARGETS[0].length;
+        var NR = TARGETS.length;
+
+        function rAA() { return AAs[Math.floor(Math.random()*AAs.length)]; }
+        function rCh() { return Math.random()<0.12 ? '-' : rAA(); }
+
+        var ct = document.getElementById('msa-hero');
+        var grid = [];
+        for (var r=0; r<NR; r++) {
+            var rd = document.createElement('div');
+            rd.className = 'msa-row';
+            var sp = [];
+            for (var c=0; c<SL; c++) {
+                var s = document.createElement('span');
+                s.className = 'msa-char';
+                s.textContent = ' ';
+                sp.push(s);
+                rd.appendChild(s);
+            }
+            grid.push({el:rd, spans:sp, seq:[]});
+            ct.appendChild(rd);
+        }
+
+        var anc = [];
+        for (var c=0; c<SL; c++) anc.push(rCh());
+        grid.forEach(function(row) {
+            row.seq = anc.slice();
+            row.spans.forEach(function(s, c) {
+                s.textContent = anc[c];
+                s.className = anc[c]==='-' ? 'msa-char gap' : 'msa-char cycling';
+            });
+        });
+
+        var gen = 0, maxGen = 55, locked = {};
+        var gensPerSweep = Math.floor(maxGen / CSORTED.length);
+
+        var ev = setInterval(function() {
+            gen++;
+            var currentTarget = Math.min(Math.floor(gen / gensPerSweep), CSORTED.length - 1);
+            var activeCol = CSORTED[currentTarget];
+
+            grid.forEach(function(row, r) {
+                row.spans.forEach(function(s, c) {
+                    var k = r+','+c;
+                    if (locked[k]) return;
+                    if (CSET.has(c)) {
+                        var isActive = (CSORTED.indexOf(c) <= currentTarget);
+                        if (!isActive) {
+                            if (Math.random() < 0.18) {
+                                row.seq[c] = rAA();
+                                s.textContent = row.seq[c];
+                                s.className = 'msa-char cycling';
+                            }
+                            return;
+                        }
+                        if (row.seq[c] !== TARGETS[r][c]) {
+                            var pressure = (c === activeCol) ? 0.35 : 0.05;
+                            if (Math.random() < pressure) {
+                                row.seq[c] = TARGETS[r][c];
+                                s.textContent = TARGETS[r][c];
+                                s.className = 'msa-char conserved lock-flash';
+                                locked[k] = true;
+                            } else if (Math.random() < 0.15) {
+                                row.seq[c] = rAA();
+                                s.textContent = row.seq[c];
+                                s.className = 'msa-char cycling';
+                            }
+                        } else { s.className = 'msa-char conserved'; locked[k] = true; }
+                    } else {
+                        if (Math.random() < 0.08) {
+                            row.seq[c] = rCh();
+                            s.textContent = row.seq[c];
+                            s.className = row.seq[c]==='-' ? 'msa-char gap' : 'msa-char';
+                        }
+                    }
+                });
+            });
+            if (gen >= maxGen) {
+                clearInterval(ev);
+                grid.forEach(function(row, r) {
+                    row.spans.forEach(function(s, c) {
+                        s.textContent = TARGETS[r][c];
+                        s.className = CSET.has(c) ? 'msa-char conserved' :
+                            TARGETS[r][c]==='-' ? 'msa-char gap' : 'msa-char';
+                    });
+                });
+            }
+        }, 150);
+    })();
+    </script>
+
     <div class="content">
         <p class="fade-in">
             We are three London-based PhD students who believe computation is transforming biology. Every couple of months we invite four speakers whose work excites us to share their perspective on how this is happening.
@@ -293,7 +460,7 @@
                         <span class="talk-title">"Proteins = Universal Fabricators"</span>
                     </li>
                 </ul>
-                <p class="sponsors">Sponsored by <a href="https://www.pillar.vc/">Pillar VC</a> &amp; <a href="https://localglobe.vc">LocalGlobe</a></p>
+                <p class="sponsors">Sponsored by <a href="https://www.encode.club/">Encode</a>, <a href="https://www.aria.org.uk/">ARIA</a> &amp; <a href="https://localglobe.vc">LocalGlobe</a></p>
             </div>
 
             <div class="event">
@@ -391,8 +558,8 @@
         function scrambleNode(node) {
             const target = node.textContent;
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
-            const steps = 15;
-            const speed = 30;
+            const steps = 25;
+            const speed = 50;
             let step = 0;
 
             const interval = setInterval(() => {
