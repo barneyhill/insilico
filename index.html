@@ -235,39 +235,37 @@
             color: var(--teal);
         }
 
-        /* Past events: lighter green (mint) as the primary tone */
-        .past-events .event h3 a,
-        .past-events .speaker-name {
+        /* Event listings: lighter green (mint) as the primary tone */
+        .event-list .event h3 a,
+        .event-list .speaker-name {
             color: var(--mint);
         }
 
-        .past-events a:hover {
+        .event-list .event h3 a:hover,
+        .event-list .speaker-name:hover,
+        .event-list .sponsors a:hover {
             color: var(--teal);
             text-decoration-color: var(--teal-deep);
         }
 
-        .past-events .event-meta {
+        .event-list .event-meta {
             color: color-mix(in srgb, var(--mint) 58%, var(--teal-deep));
         }
 
-        .past-events .speaker-affiliation {
+        .event-list .speaker-affiliation {
             color: color-mix(in srgb, var(--mint) 52%, var(--sage));
         }
 
-        .past-events .talk-title {
+        .event-list .talk-title {
             color: color-mix(in srgb, var(--mint) 80%, var(--bg));
         }
 
-        .past-events .sponsors {
+        .event-list .sponsors {
             color: color-mix(in srgb, var(--mint) 48%, var(--teal-deep));
         }
 
-        .past-events .sponsors a {
+        .event-list .sponsors a {
             color: var(--mint);
-        }
-
-        .past-events .sponsors a:hover {
-            color: var(--teal);
         }
 
         /* MSA Animated Title */
@@ -469,7 +467,7 @@
             </ul>
         </div>
 
-        <div class="category">
+        <div class="category event-list">
             <h2>Upcoming</h2>
 
             <a href="https://luma.com/2daur0ny" class="register-btn">REGISTER HERE</a>
@@ -495,11 +493,11 @@
                         <span class="talk-title">"Molecular glues by design"</span>
                     </li>
                 </ul>
-                <p class="sponsors">Sponsored by <a href="https://fiftyyears.com/">Fifty Years</a></p>
+                <p class="sponsors">Sponsored by <a href="https://fiftyyears.com/">Fifty Years</a> &amp; <a href="https://www.aria.org.uk/">ARIA</a></p>
             </div>
         </div>
 
-        <div class="category past-events">
+        <div class="category event-list past-events">
             <h2>Past</h2>
 
             <div class="event">
