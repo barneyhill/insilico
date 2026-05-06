@@ -149,6 +149,39 @@
             font-size: 13px;
         }
 
+        .register-btn {
+            display: block;
+            width: fit-content;
+            font-family: 'VT323', 'Departure Mono', monospace;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            letter-spacing: 0.12em;
+            color: var(--bg);
+            background: var(--magenta);
+            padding: 10px 28px;
+            margin: 8px auto 32px;
+            text-decoration: none;
+            border: 3px solid var(--magenta);
+            box-shadow:
+                4px 4px 0 var(--teal),
+                8px 8px 0 color-mix(in srgb, var(--teal-deep) 60%, var(--bg));
+            transition: transform 0.1s, box-shadow 0.1s;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            color: var(--bg);
+            text-decoration: none;
+            transform: translate(2px, 2px);
+            box-shadow:
+                2px 2px 0 var(--teal),
+                4px 4px 0 color-mix(in srgb, var(--teal-deep) 60%, var(--bg));
+        }
+
+        .register-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
         .speaker-list {
             list-style: none;
             padding: 0;
@@ -434,6 +467,36 @@
                 <li>How do we collate enough preclinical data (i.e. toxicology read-outs) so that biomolecular modelling can be useful beyond hit discovery?</li>
                 <li>How can experimental validation keep pace with the growing volume of confident in silico genetic disease predictions?</li>
             </ul>
+        </div>
+
+        <div class="category">
+            <h2>Upcoming</h2>
+
+            <a href="https://luma.com/2daur0ny" class="register-btn">REGISTER HERE</a>
+
+            <div class="event">
+                <h3><a href="https://luma.com/2daur0ny">In Silico #005</a></h3>
+                <p class="event-meta">May 13th, 2026 &middot; 5050 SoHo HQ</p>
+                <ul class="speaker-list">
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/ruxandra-t-53a20b129/">Ruxandra Teslo</a> <span class="speaker-affiliation">(RenPhil)</span>
+                        <span class="talk-title">TBA</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/raina-thomas-061a78199/">Raina Thomas</a> <span class="speaker-affiliation">(Google DeepMind)</span>
+                        <span class="talk-title">"AlphaGenome: Advancing regulatory variant effect prediction with a unified DNA sequence model"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/tlohr/">Thomas L&ouml;hr</a> <span class="speaker-affiliation">(Bind Research)</span>
+                        <span class="talk-title">"Predicting small molecule binding to disordered proteins"</span>
+                    </li>
+                    <li>
+                        <a class="speaker-name" href="https://www.linkedin.com/in/dominykas-lukauskis-41917b129/">Dominykas Lukauskis</a> <span class="speaker-affiliation">(Ternary Therapeutics)</span>
+                        <span class="talk-title">"Molecular glues by design"</span>
+                    </li>
+                </ul>
+                <p class="sponsors">Sponsored by <a href="https://fiftyyears.com/">Fifty Years</a></p>
+            </div>
         </div>
 
         <div class="category past-events">
